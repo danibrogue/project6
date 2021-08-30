@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Book{% endblock %}
+
+{% block body %}
+    {{ include ('book/header.html.twig') }}
+    <div class="container p-2 mt-5">
+        <div class="row m-1">
+            <img class="img-thumbnail" width="300px" height="300px"
+                 src="{{ asset('images/' ~ book.image) }}" alt="Обложка">
+            <div class="d-flex flex-column p-2">
+                <p>Название книги: {{ book.name }}</p>
+                <p>Автор: {{ book.author }}</p>
+                <p> Дата прочтения: {{ book.dateRead|date('H:i:s Y-m-d') }}</p>
+                <p>Ссылка для скачивания: <a href="{{ asset('books/'~ book.bookFile) }}" download="" class="badge badge-light">{{ book.name }}</a></p>
+            </div>
+        </div>
+
+        <a  class="btn btn-success mt-2" href="{{ path('book_index') }}">Вернуться</a>
+
+        <a class="btn btn-success mt-2" href="{{ path('book_edit', {'id': book.id}) }}">Редактировать</a>
+    </div>
+
+        {{ include('book/_delete_form.html.twig') }}
+{% endblock %}

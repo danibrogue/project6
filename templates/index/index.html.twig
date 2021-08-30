@@ -1,0 +1,41 @@
+S{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% if user is not empty %}
+        <nav class="fixed-top navbar navbar-light p-0" style="background-color: burlywood">
+            <p class="navbar-brand"><a class="text-dark" href="\">Моя библиотека</a></p>
+            <p class="navbar-brand text-center">  <a class="text-dark" href="/book">Менеджер книг</a></p>
+            <p class="navbar-brand">{{ user }},<a class="text-dark" href="/logout" > Выход </a></p>
+        </nav>
+    {% else%}
+        <nav class="fixed-top navbar navbar-light p-0" style="background-color: burlywood">
+            <p class="navbar-brand"><a  class="x20" href="">Моя библиотека</a> </p>
+            <p class="navbar-brand"><a class="x20" href="/login">Авторизация</a>
+                <a  class="m-4 x20" href="/register">Регистрация</a></p>
+        </nav>
+    {% endif %}
+    <div class="container mt-5">
+        {% if books is not empty %}
+            <div class="d-flex flex-column p-2">
+                {% for book in books %}
+                    <div class="row m-3">
+                        <img class="img-thumbnail" width="300px" height="300px"
+                             src="{{ asset('images/' ~ book.image) }}" alt="Обложка">
+                        <div class="d-flex flex-column p-2">
+                            <p>Название книги: {{ book.name }}</p>
+                            <p>Автор: {{ book.author }}</p>
+                            <p> Дата прочтения: {{ book.dateRead|date('H:i:s Y-m-d') }}</p>
+                            <p>Ссылка для скачивания: <a href="{{ asset('books/'~ book.bookFile) }}" download="" class="badge badge-light">{{ book.name }}</a></p>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+        {% else %}
+            <div >
+                <p class="text-center text-warning">Нету книг!</p>
+            </div>
+        {% endif %}
+    </div>
+
+{% endblock %}

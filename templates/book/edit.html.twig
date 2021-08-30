@@ -1,0 +1,17 @@
+  
+{% extends 'base.html.twig' %}
+{% block title %}Edit Book{% endblock %}
+
+{% block body %}
+    {{ include ('book/header.html.twig') }}
+    <div class="container mt-5">
+        <h1>Редактирование</h1>
+    </div>
+
+    {{ include('book/_form.html.twig', {'button_label': 'Редактировать'}) }}
+
+    {{ include('book/_delete_form.html.twig') }}
+    <div class="container p-2">
+        <a class="btn btn-success" href="{{ path('book_index') }}">Вернуться</a>
+    </div>
+{% endblock %}

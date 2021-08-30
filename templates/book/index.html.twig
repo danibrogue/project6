@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Book index{% endblock %}
+
+{% block body %}
+    {{ include ('book/header.html.twig') }}
+    <h1 class="mt-5">Список книг</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Название книги</th>
+                <th>Автор</th>
+                <th>Имя картинки</th>
+                <th>Имя файла книги</th>
+                <th>Дата прочтения</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for book in books %}
+            <tr>
+                <td>{{ book.id }}</td>
+                <td>{{ book.name }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.image }}</td>
+                <td>{{ book.bookFile }}</td>
+                <td>{{ book.dateRead ? book.dateRead|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a  class="btn btn-success" href="{{ path('book_show', {'id': book.id}) }}">Открыть</a>
+                    <a class="btn btn-success" href="{{ path('book_edit', {'id': book.id}) }}">редактировать</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a  class="btn btn-warning" href="{{ path('book_new') }}">Создать новую запись</a>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Book{% endblock %}
+
+{% block body %}
+    {{ include ('book/header.html.twig') }}
+    <div class="container p-2 mt-5">
+        <h1>Создание новой записи</h1>
+    </div>
+
+    {{ include('book/_form.html.twig') }}
+    <div class="container p-2">
+        <a class="btn btn-success" href="{{ path('book_index') }}">Вернуться</a>
+    </div>
+{% endblock %}
